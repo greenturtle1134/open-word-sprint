@@ -17,6 +17,10 @@ app = Vue.createApp({
 			rollingAverageWPM: 0,
 			lastRecordValue: 0,
 			lastRecordTime: Date.now(),
+			sprintStartTime: null,
+			sprintStartValue: null,
+			sprintGoalWords: null,
+			// sprintGoalTime: null,
 			tareValue: 0
 		};
 	},
