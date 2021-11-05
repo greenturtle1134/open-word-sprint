@@ -12,8 +12,8 @@ app = Vue.createApp({
 	data() {
 		return {
 			text: "",
-			interval: 1000,
-			rollingWeight: 10,
+			interval: 5000,
+			rollingWeight: 4,
 			rollingAverageWPM: 0,
 			lastRecordValue: 0,
 			lastRecordTime: Date.now(),
@@ -26,6 +26,9 @@ app = Vue.createApp({
 		}
 	},
 	methods: {
+		zeroButton(e) {
+			this.rollingAverageWPM = 0;
+		},
 		tareButton(e) {
 			this.tareValue = this.wordCount;
 			this.rollingAverageWPM = 0;
