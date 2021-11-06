@@ -17,16 +17,26 @@ app = Vue.createApp({
 			rollingAverageWPM: 0,
 			lastRecordValue: 0,
 			lastRecordTime: Date.now(),
+			sprintActive: false,
 			sprintStartTime: null,
-			sprintStartValue: null,
+			sprintStartValue: 0,
 			sprintGoalWords: null,
-			// sprintGoalTime: null,
+			sprintResultFreeze: null,
+			sprintGoalTime: null,
 			tareValue: 0
 		};
 	},
 	computed: {
 		wordCount() {
 			return countWords(this.text);
+		},
+		sprintWordCount() {
+			if (this.sprintResultFreeze != null) {
+				return this.sprintResultFreeze;
+			}
+			else {
+				return this.wordCount - this.sprintStartValue;
+			}
 		}
 	},
 	methods: {
