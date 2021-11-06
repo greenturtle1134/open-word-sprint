@@ -15,7 +15,7 @@
       <h1>Open Word Sprint</h1>
     </div>
     <div class="row">
-      <div class="col-2 border">
+      <div class="col-3 border">
         <h2>Sprints</h2>
         <input v-model.number="sprintGoalWords" type="number" />
         <button type="button" class="btn btn-primary" @click="startSprint">Start Sprint</button>
@@ -25,30 +25,33 @@
           </div>
         </div>
       </div>
-      <div class="col-8 border">
-        <textarea class="w-100" v-model="text" placeholder="Start typing here!"></textarea>
+      <div class="col-6 border">
+    <div class="row">
+          <textarea class="w-100" v-model="text" placeholder="Start typing here!"></textarea>
+        </div>
+        <div class="row">
+          <div class="col border">
+            <p>
+              <strong>{{ Math.round(rollingAverageWPM) }}</strong>
+              wpm
+            </p>
+          </div>
+          <div class="col border">
+            <p>
+              <strong>{{ wordCount - tareValue }}</strong>
+              words
+            </p>
+          </div>
+          <div class="col border">
+            <button class="btn btn-secondary m-1" @click="tareButton">Tare/Zero</button>
+          </div>
+        </div>
       </div>
-      <div class="col-2 border">
+      <div class="col-3 border">
         <h2>Incentive</h2>
       </div>
     </div>
-    <div class="row">
-      <div class="col border">
-        <p>
-          <strong>{{ Math.round(rollingAverageWPM) }}</strong>
-          wpm
-        </p>
-      </div>
-      <div class="col border">
-        <p>
-          <strong>{{ wordCount - tareValue }}</strong>
-          words
-        </p>
-      </div>
-      <div class="col border">
-        <button class="btn btn-secondary m-1" @click="tareButton">Tare/Zero</button>
-      </div>
-    </div>
+
   </div>
   <script src="script.js"></script>
 </body>
