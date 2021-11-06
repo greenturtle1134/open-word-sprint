@@ -17,16 +17,18 @@
     <div class="row">
       <div class="col-3 border">
         <h2>Sprints</h2>
-        <input v-model.number="sprintGoalWords" type="number" />
-        <button type="button" class="btn btn-primary" @click="startSprint">Start Sprint</button>
-        <div class="progress">
+        <input class="m-1" v-model.number="sprintGoalWords" type="number" />
+        <button type="button" class="btn btn-success m-1" @click="startSprint">Start</button>
+        <button type="button" class="btn btn-danger m-1" @click="stopSprint">Stop</button>
+        <button type="button" class="btn btn-secondary m-1" @click="clearSprint">Clear</button>
+        <div class="progress m-1">
           <div class="progress-bar" role="progressbar" v-bind:style="{width: sprintBarPercent*100+'%'}">
-            {{ sprintActive ? Math.round(sprintBarPercent*100)+'%' : "No sprint active" }}
+            {{ Math.round(sprintBarPercent*100)+'%' }}
           </div>
         </div>
       </div>
       <div class="col-6 border">
-    <div class="row">
+        <div class="row">
           <textarea class="w-100" v-model="text" placeholder="Start typing here!"></textarea>
         </div>
         <div class="row">

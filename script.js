@@ -62,6 +62,18 @@ app = Vue.createApp({
 			this.sprintStartValue = this.wordCount;
 			this.sprintActive = true;
 		},
+		stopSprint(e) {
+			this.sprintWordFreeze = this.sprintWordCount;
+			this.sprintActive = false;
+		},
+		clearSprint(e) {
+			this.stopSprint();
+			this.sprintStartTime= null
+			this.sprintStartValue= null
+			this.sprintGoalWords= null
+			this.sprintWordFreeze= null
+			this.sprintGoalTime= null
+		},
 		updateRate() {
 			let diff = this.wordCount - this.lastRecordValue;
 			this.lastRecordValue = this.wordCount;
