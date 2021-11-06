@@ -30,25 +30,24 @@ app = Vue.createApp({
 		wordCount() {
 			return countWords(this.text);
 		},
-		sprintWordCount() { // Wordcount of this sprint or the last one
+		sprintWordCount() {
+			// Wordcount of this sprint or the last one
 			if (!this.sprintActive) {
-				if(this.sprintWordFreeze != null) {
+				if (this.sprintWordFreeze != null) {
 					return this.sprintWordFreeze;
-				}
-				else {
+				} else {
 					return null;
 				}
-			}
-			else {
+			} else {
 				return this.wordCount - this.sprintStartValue;
 			}
 		},
-		sprintBarPercent() { // Decimal value to be displayed on the bar
-			if(this.sprintGoalWords == null || this.sprintWordCount == null) {
+		sprintBarPercent() {
+			// Decimal value to be displayed on the bar
+			if (this.sprintGoalWords == null || this.sprintWordCount == null) {
 				return 0;
-			}
-			else {
-				return this.sprintWordCount/this.sprintGoalWords;
+			} else {
+				return this.sprintWordCount / this.sprintGoalWords;
 			}
 		}
 	},
@@ -67,12 +66,12 @@ app = Vue.createApp({
 			this.sprintActive = false;
 		},
 		clearSprint(e) {
-			this.stopSprint();
-			this.sprintStartTime= null
-			this.sprintStartValue= null
-			this.sprintGoalWords= null
-			this.sprintWordFreeze= null
-			this.sprintGoalTime= null
+			stopSprint();
+			this.sprintStartTime = null;
+			this.sprintStartValue = null;
+			this.sprintGoalWords = null;
+			this.sprintWordFreeze = null;
+			this.sprintGoalTime = null;
 		},
 		updateRate() {
 			let diff = this.wordCount - this.lastRecordValue;
