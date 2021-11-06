@@ -17,13 +17,13 @@ app = Vue.createApp({
 			rollingAverageWPM: 0,
 			lastRecordValue: 0,
 			lastRecordTime: Date.now(),
-			sprintActive: false,
-			sprintStartTime: null,
-			sprintStartValue: 0,
-			sprintGoalWords: null,
-			sprintResultFreeze: null,
-			sprintGoalTime: null,
-			tareValue: 0
+			tareValue: 0,
+			sprintActive: false, // Is a sprint currently happening?
+			sprintStartTime: null, // When did the current sprint start?
+			sprintStartValue: null, // What was the wordcount when this sprint started?
+			sprintGoalWords: 0, // What is the wordcount goal of this sprint?
+			sprintWordFreeze: 0, // Previous result to be shown on the GUI
+			sprintGoalTime: null // Time the sprint ends
 		};
 	},
 	computed: {
@@ -31,11 +31,21 @@ app = Vue.createApp({
 			return countWords(this.text);
 		},
 		sprintWordCount() {
-			if (this.sprintResultFreeze != null) {
-				return this.sprintResultFreeze;
+			if (!this.sprintActive) {
+				if(this.sprintWordFreeze != null) {
+					return this.sprintWordFreeze;
+				}
 			}
 			else {
 				return this.wordCount - this.sprintStartValue;
+			}
+		},
+		sprintBarPercent() {
+			if(!this.sprintActive) {
+				return 0;
+			}
+			else {
+				return this.sprintWordCount/this.sprintGoalWords;
 			}
 		}
 	},
@@ -43,6 +53,11 @@ app = Vue.createApp({
 		tareButton(e) {
 			this.tareValue = this.wordCount;
 			this.rollingAverageWPM = 0;
+		},
+		startSprint(e) {
+			this.sprintStartTime = Date.now();
+			this.sprintStartValue = this.wordCount;
+			this.sprintActive = true;
 		},
 		updateRate() {
 			let diff = this.wordCount - this.lastRecordValue;
