@@ -21,8 +21,8 @@ app = Vue.createApp({
 			sprintActive: false, // Is a sprint currently happening?
 			sprintStartTime: null, // When did the current sprint start?
 			sprintStartValue: null, // What was the wordcount when this sprint started?
-			sprintGoalWords: 0, // What is the wordcount goal of this sprint?
-			sprintWordFreeze: 0, // Previous result to be shown on the GUI
+			sprintGoalWords: null, // What is the wordcount goal of this sprint?
+			sprintWordFreeze: null, // Previous result to be shown on the GUI
 			sprintGoalTime: null // Time the sprint ends
 		};
 	},
@@ -30,18 +30,21 @@ app = Vue.createApp({
 		wordCount() {
 			return countWords(this.text);
 		},
-		sprintWordCount() {
+		sprintWordCount() { // Wordcount of this sprint or the last one
 			if (!this.sprintActive) {
 				if(this.sprintWordFreeze != null) {
 					return this.sprintWordFreeze;
+				}
+				else {
+					return null;
 				}
 			}
 			else {
 				return this.wordCount - this.sprintStartValue;
 			}
 		},
-		sprintBarPercent() {
-			if(!this.sprintActive) {
+		sprintBarPercent() { // Decimal value to be displayed on the bar
+			if(this.sprintGoalWords == null || this.sprintWordCount == null) {
 				return 0;
 			}
 			else {

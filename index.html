@@ -17,12 +17,11 @@
     <div class="row">
       <div class="col-2 border">
         <h2>Sprints</h2>
-
-        <input v-model.number="sprintGoalWords" type="number"/>
+        <input v-model.number="sprintGoalWords" type="number" />
         <button type="button" class="btn btn-primary" @click="startSprint">Start Sprint</button>
         <div class="progress">
           <div class="progress-bar" role="progressbar" v-bind:style="{width: sprintBarPercent*100+'%'}">
-            {{ Math.round(sprintBarPercent*100)+'%' }}
+            {{ sprintActive ? Math.round(sprintBarPercent*100)+'%' : "No sprint active" }}
           </div>
         </div>
       </div>
